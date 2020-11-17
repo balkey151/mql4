@@ -1,2 +1,2 @@
-*.mq4 diff=utf16
-*.mqh diff=utf16
+*.mq4 encoding=utf-8
+*.mqh encoding=utf-8
