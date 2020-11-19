@@ -12,12 +12,12 @@
 // インジケータの表示におけるプロパティ定義
 #property indicator_buffers 2 // インジケータのバッファ数
 
-// 1本目(移動平均線)の設定
+// 1本目(上昇トレンド)の設定
 #property indicator_color1 clrRed //インジケータの色
 #property indicator_width1 2 //インジケータの太さ
 #property indicator_type1 DRAW_ARROW // インジケータの描画タイプをアローに設定
 
-// 2本目(エンベロープ線(+))の設定
+// 2本目(下降トレンド)の設定
 #property indicator_color2 clrRed //インジケータの色
 #property indicator_width2 2 //インジケータの太さ
 #property indicator_type2 DRAW_ARROW // インジケータの描画タイプをアローに設定
@@ -26,8 +26,8 @@
 #define IND_TARGET_BARS 3
 
 // インジケータ表示用の動的配列を定義
-double IndBuffrer1[]; // 移動平均線の表示用動的配列
-double IndBuffrer2[]; // エンベロープ線(+)の表示用動的配列
+double IndBuffrer1[]; // 1本目の表示用動的配列
+double IndBuffrer2[]; // 2本目の表示用動的配列
 
 //+------------------------------------------------------------------+
 //| 初期化時に1度起動するファンクション
@@ -94,14 +94,14 @@ int OnCalculate(const int rates_total, //バーの総数
        
        if( getLower > 0 ){
            // 価格を10ピクセル単位でオフセット
-           getLower = getOffsetRate(getLower ,10);
+           getLower = getOffsetRate(getLower ,30);
            // インジケータ1に、ロワーシグナル表示を設定
            IndBuffrer1[count] = getLower;
        }
        
        if( getUpper > 0 ){
            // 価格を10ピクセル単位でオフセット
-           getUpper = getOffsetRate(getUpper ,10);
+           getUpper = getOffsetRate(getUpper ,-30);
            // インジケータ1に、ロワーシグナル表示を設定
            IndBuffrer2[count] = getUpper;
        }
